@@ -2,7 +2,7 @@ trigger:
 - master  # Adjust to your branch name
 
 pool:
-  name: Lab4  # Ensure you have a self-hosted agent
+  name: Default  # Ensure you have a self-hosted agent
 
 steps:
 - script: dotnet build --configuration Release
