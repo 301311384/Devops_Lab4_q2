@@ -1,0 +1,7 @@
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\bin\Debug\Lab4_Question2.exe.config
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\bin\Debug\Lab4_Question2.exe
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\bin\Debug\Lab4_Question2.pdb
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\obj\Debug\Lab4_Question2.csproj.AssemblyReference.cache
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\obj\Debug\Lab4_Question2.csproj.CoreCompileInputs.cache
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\obj\Debug\Lab4_Question2.exe
+C:\Users\parth\source\repos\Lab4_Question2\Lab4_Question2\obj\Debug\Lab4_Question2.pdb
