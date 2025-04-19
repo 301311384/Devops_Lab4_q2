@@ -2,7 +2,7 @@ trigger:
 - master  # Adjust to your branch name
 
 pool:
-  name: Default  # Ensure you have a self-hosted agent
+  vmImage: 'windows-latest'
 
 steps:
 - script: dotnet build --configuration Release
