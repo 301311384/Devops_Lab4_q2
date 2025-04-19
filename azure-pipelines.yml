@@ -2,38 +2,43 @@ trigger:
 - master
 
 pool:
-  name: Lab4
+  name: Lab4  # Change this if using Microsoft-hosted agent like 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
   platform: 'Any CPU'
-  solution: '**/Lab4_Question2.csproj'
+  project: '**/Lab4_Question2.csproj'  # Still using .csproj (not .sln)
 
 steps:
 
-# Optional Cleanup
+# Clean up temp folders to free space
 - task: PowerShell@2
   displayName: 'Clean Temporary Directories'
   inputs:
     targetType: 'inline'
     script: |
-      Write-Host "Cleaning temp folders to avoid disk space issues..."
+      Write-Host "Cleaning temp folders..."
       Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-      Write-Host "Cleanup complete."
+      Write-Host "Cleanup done."
 
-# Restore (if applicable)
+# Optional: Install NuGet if needed
 - task: NuGetToolInstaller@1
 
-# MSBuild Publish
+# Build & Publish using MSBuild
 - task: VSBuild@1
-  displayName: 'Build and Publish with MSBuild'
+  displayName: 'Build and Publish Project'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:Configuration=$(buildConfiguration) /p:Platform="$(platform)" /target:Publish /p:PublishDir="$(Build.ArtifactStagingDirectory)\\"'
+    solution: '$(project)'
+    msbuildArgs: >
+      /p:Configuration=$(buildConfiguration)
+      /p:Platform="$(platform)"
+      /p:OutputPath="$(Build.ArtifactStagingDirectory)\"
+      /p:PublishDir="$(Build.ArtifactStagingDirectory)\"
+      /target:Publish
     platform: '$(platform)'
     configuration: '$(buildConfiguration)'
 
-# Publish Artifact
+# Publish the artifacts to Azure DevOps
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
