@@ -25,18 +25,6 @@ steps:
 - task: NuGetToolInstaller@1
 
 # Build & Publish using MSBuild
-- task: VSBuild@1
-  displayName: 'Build and Publish Project'
-  inputs:
-    solution: '$(project)'
-    msbuildArgs: >
-      /p:Configuration=$(buildConfiguration)
-      /p:Platform="$(platform)"
-      /p:OutputPath="$(Build.ArtifactStagingDirectory)\"
-      /p:PublishDir="$(Build.ArtifactStagingDirectory)\"
-      /target:Publish
-    platform: '$(platform)'
-    configuration: '$(buildConfiguration)'
 
 # Publish the artifacts to Azure DevOps
 - task: PublishBuildArtifacts@1
