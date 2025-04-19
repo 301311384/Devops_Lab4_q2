@@ -2,7 +2,7 @@ trigger:
 - master  # Adjust to your branch name
 
 pool:
-  vmImage: 'windows-latest'
+  name: Lab4 
 
 steps:
 - script: dotnet build --configuration Release
