@@ -1,35 +1,17 @@
 trigger:
-- master
+- master  # Adjust to your branch name
 
 pool:
-  name: Lab4  # Change this if using Microsoft-hosted agent like 'windows-latest'
-
-variables:
-  buildConfiguration: 'Release'
-  platform: 'Any CPU'
-  project: '**/Lab4_Question2.csproj'  # Still using .csproj (not .sln)
+  name: Lab4  # Ensure you have a self-hosted agent
 
 steps:
+- script: dotnet build --configuration Release
+  displayName: 'Build Solution'
 
-# Clean up temp folders to free space
-- task: PowerShell@2
-  displayName: 'Clean Temporary Directories'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Cleaning temp folders..."
-      Get-ChildItem -Path $env:TEMP -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-      Write-Host "Cleanup done."
+- script: dotnet publish -c Release -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish Application'
 
-# Optional: Install NuGet if needed
-- task: NuGetToolInstaller@1
-
-# Build & Publish using MSBuild
-
-# Publish the artifacts to Azure DevOps
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
